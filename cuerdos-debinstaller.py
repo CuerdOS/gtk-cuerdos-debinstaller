@@ -8,7 +8,7 @@ from gi.repository import Gtk, GLib
 
 class DebInstaller(Gtk.Window):
     def __init__(self):
-        Gtk.Window.__init__(self, title="Instalador de paquetes DEB")
+        Gtk.Window.__init__(self, title="DEB package installer")
         self.set_default_size(400, 300)
 
         # Crear un contenedor
@@ -21,19 +21,19 @@ class DebInstaller(Gtk.Window):
         container.pack_start(self.textview, True, True, 0)
 
         # Crear un botón para iniciar la instalación
-        install_button = Gtk.Button(label="Instalar DEB")
+        install_button = Gtk.Button(label="Install DEB package")
         install_button.connect("clicked", self.on_install_button_clicked)
         container.pack_start(install_button, False, False, 0)
 
     def on_install_button_clicked(self, button):
         # Crear un diálogo de selección de archivos
         dialog = Gtk.FileChooserDialog(
-            title="Seleccione un archivo DEB",
+            title="Select a DEB package",
             action=Gtk.FileChooserAction.OPEN,
         )
 
         filter_deb = Gtk.FileFilter()
-        filter_deb.set_name("Archivos DEB")
+        filter_deb.set_name("DEB packages")
         filter_deb.add_mime_type("application/vnd.debian.binary-package")
         dialog.add_filter(filter_deb)
 
