@@ -15,10 +15,16 @@ class DebInstaller(Gtk.Window):
         container = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.add(container)
 
+        # Crear un ScrolledWindow
+        scrolled_window = Gtk.ScrolledWindow()
+        scrolled_window.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
+        container.pack_start(scrolled_window, True, True, 0)
+
         # Crear un TextView no editable
         self.textview = Gtk.TextView()
         self.textview.set_editable(False)
-        container.pack_start(self.textview, True, True, 0)
+        self.textview.set_wrap_mode(Gtk.WrapMode.NONE)  # Desactivar el ajuste de línea
+        scrolled_window.add(self.textview)
 
         # Crear un botón para iniciar la instalación
         install_button = Gtk.Button(label="Install DEB package")
@@ -114,4 +120,3 @@ win = DebInstaller()
 win.connect("destroy", Gtk.main_quit)
 win.show_all()
 Gtk.main()
-
